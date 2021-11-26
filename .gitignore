@@ -3,3 +3,4 @@
 /ctypes/__pycache__/
 /c_src/build/
 /pybind11/build/
+/pybind11/3rdparty/pybind11/
