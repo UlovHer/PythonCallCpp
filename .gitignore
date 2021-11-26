@@ -2,3 +2,4 @@
 /venv/
 /ctypes/__pycache__/
 /c_src/build/
+/pybind11/build/
