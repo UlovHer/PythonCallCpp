@@ -6,7 +6,7 @@ Python 因为其是一门解释性语言和动态类型的原因，在计算密�
 
 `ctypes`是一个用于Python的外部函数库。它提供C兼容的数据类型，并允许在DLL或共享库中调用函数。它可以用来将这些库封装在纯Python中。使用ctypes调用C动态库，如果调用C++动态库，则参数类型必须符合C类型。
 
-- 官方文档：
+- 官方文档：[ctypes --- Python 的外部函数库 — Python 3.7.12 文档](https://docs.python.org/zh-cn/3.7/library/ctypes.html)
 
 #### 2.1 基本数据类型
 
@@ -143,7 +143,7 @@ ctypes.cast(a, ctypes.POINTER(ctypes.c_int))
 ```
 
     <__main__.c_byte_Array_4 object at 0x00000274E91671C8
-
+    
     ctypes.wintypes.LP_c_long at 0x274e9167248>
 
 
