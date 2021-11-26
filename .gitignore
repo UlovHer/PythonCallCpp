@@ -1,5 +1,4 @@
 .vscode/settings.json
 /venv/
-
 /ctypes/__pycache__/
 /c_src/build/
