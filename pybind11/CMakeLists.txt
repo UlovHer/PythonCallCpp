@@ -13,8 +13,12 @@ include(CPack)
 # find_package(pybind11 REQUIRED)
 set(PYBIND11 ${PROJECT_SOURCE_DIR}/3rdparty/pybind11)
 add_subdirectory(${PYBIND11})
-include_directories(${PYBIND11}/include)
-
+set(Python ${PROJECT_SOURCE_DIR}/3rdparty/Python)
+# find_package(Python COMPONENTS Interpreter Development)
+# ${Python_INCLUDE_DIRS}
+include_directories(${PYBIND11}/include ${PROJECT_SOURCE_DIR}/include ${Python}/include)
+# link_directories(${Python_LIBRARY_DIRS})
+link_directories(${Python}/libs)
 # 配置输出
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
@@ -22,11 +26,11 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/lib)
 
 # 配置库后缀
 set(CMAKE_DEBUG_POSTFIX "d")
-aux_source_directory(${PROJECT_SOURCE_DIR}/src/bind_func CPP_SRC)
-# 创建pybind11的模块,使用pybind11 method:
-pybind11_add_module(bind_func ${CPP_SRC})
+# aux_source_directory(${PROJECT_SOURCE_DIR}/src/bind_func CPP_SRC)
+# # 创建pybind11的模块,使用pybind11 method:
+# pybind11_add_module(bind_func ${CPP_SRC})
 
-# find_package(Python COMPONENTS Interpreter Development)
+
 # find_package(pybind11 CONFIG)
 
 # # 另一种方式,使用Python method:
@@ -40,11 +44,20 @@ pybind11_add_module(bind_func ${CPP_SRC})
 # add_library(bind_func MODULE ${CPP_SRC})
 # target_link_libraries(bind_func PUBLIC pybind11::module)
 
-# 编译可执行文件
-# add_executable(TestPybind main.cpp)
-# 在C++动态库上扩展pybind11绑定
-# target_link_libraries(example_pb PUBLIC example)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/bind_func)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/bind_class)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/json_utils)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/call_python)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/embed_interpreter)
+add_subdirectory(${PROJECT_SOURCE_DIR}/test/CallPython)
+add_subdirectory(${PROJECT_SOURCE_DIR}/test/EmbedInterpreter)
 
+aux_source_directory(${PROJECT_SOURCE_DIR}/src CPP_SRC)
+# 编译可执行文件
+add_executable(TestPybind ${CPP_SRC})
+# 在C++动态库上扩展pybind11绑定
+# target_link_libraries(TestPybind PUBLIC embed_interpreter)
+target_link_libraries(TestPybind PUBLIC json_utils)
 # define (VERSION_INFO) here.
-target_compile_definitions(bind_func PRIVATE VERSION_INFO=${EXAMPLE_VERSION_INFO})
+# target_compile_definitions(bind_func PRIVATE VERSION_INFO=${EXAMPLE_VERSION_INFO})
 

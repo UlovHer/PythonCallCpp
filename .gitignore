@@ -4,3 +4,4 @@
 /c_src/build/
 /pybind11/build/
 /pybind11/3rdparty/pybind11/
+/pybind11/3rdparty/python/

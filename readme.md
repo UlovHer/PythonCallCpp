@@ -315,3 +315,5 @@ SWIG 是 Simplified Wrapper and Interface Generator 的简称，也是基于capi
 pybind11 是一个 `header-only` 的库，换句话说，只需要 C++ 项目里直接 include pybind11 的头文件就能使用。将已经存在的C++代码绑定到Python。pybind11的目标和语法都类似于boost.python库。利用编译时的内省来推断类型信息。使用起来比cython简单。
 
 - 官方文档：[Intro — pybind11 documentation](https://pybind11.readthedocs.io/en/stable/)
+
+虽然 pybind11 主要专注于使用 C++ 扩展 Python，但也可以反过来：将 Python 解释器嵌入到 C++ 程序中，在C++中执行Python模块。
